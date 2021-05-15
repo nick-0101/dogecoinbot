@@ -1,8 +1,10 @@
 from textblob import TextBlob
 from binance import Client
+from binance.enums import *
+import time
 
 # #
-#   Binance API
+#   Binance Order
 # #
 
 
@@ -14,14 +16,20 @@ def doge_order_request(client):
     buy_quantity = round(25 / float(doge_price['price']))
 
     # Create & Process Order
-    order = client.create_test_order(
-        symbol='DOGEUSDT',
-        side=Client.SIDE_BUY,
-        type=Client.ORDER_TYPE_MARKET,
-        quantity=buy_quantity
-    )
+    try:
+        order = client.create_order(
+            symbol='DOGEUSDT',
+            side=Client.SIDE_BUY,
+            type=Client.ORDER_TYPE_MARKET,
+            quantity=buy_quantity
+        )
+    except:
+        return
 
     print('Bought', buy_quantity, 'DOGE at', doge_price['price'])
+    print('Cooling down for 4 minutes')
+
+    time.sleep(240)
 
 
 def analyse_tweet(tweet, client):

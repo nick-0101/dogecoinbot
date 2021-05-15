@@ -1,5 +1,7 @@
 import os
 import datetime
+import schedule
+import time
 from dotenv import load_dotenv
 from binance import Client
 import tweepy
@@ -41,6 +43,16 @@ def checkForNewTweet(twitter_api):
     # Tweet text
     tweet = tweets.full_text
 
+    # Parse Tweet
+    punctuations = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
+    no_punct = ""
+
+    for char in tweet:
+        if char not in punctuations:
+            no_punct = no_punct + char
+
+    tweet = no_punct
+
     # Get the minute since tweet
     time_difference = datetime.datetime.now().minute - tweets.created_at.minute
 
@@ -52,4 +64,8 @@ def checkForNewTweet(twitter_api):
 
 
 if __name__ == "__main__":
-    checkForNewTweet(twitter_api)
+    schedule.every(10).seconds.do(checkForNewTweet, twitter_api)
+
+    while 1:
+        schedule.run_pending()
+        time.sleep(1)
