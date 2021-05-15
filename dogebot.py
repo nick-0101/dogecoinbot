@@ -33,7 +33,7 @@ twitter_api = tweepy.API(auth, wait_on_rate_limit=True)
 
 def checkForNewTweet(twitter_api):
     tweets = twitter_api.user_timeline(
-        screen_name="evalo01",
+        screen_name="elonmusk",
         count=1,
         lang="en",
         tweet_mode="extended",

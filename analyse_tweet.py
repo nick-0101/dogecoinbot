@@ -17,19 +17,18 @@ def doge_order_request(client):
 
     # Create & Process Order
     try:
-        order = client.create_order(
+        client.create_order(
             symbol='DOGEUSDT',
             side=Client.SIDE_BUY,
             type=Client.ORDER_TYPE_MARKET,
             quantity=buy_quantity
         )
+        print('Bought', buy_quantity, 'DOGE at', doge_price['price'])
+        print('Cooling down for 4 minutes')
+
+        time.sleep(240)
     except:
         return
-
-    print('Bought', buy_quantity, 'DOGE at', doge_price['price'])
-    print('Cooling down for 4 minutes')
-
-    time.sleep(240)
 
 
 def analyse_tweet(tweet, client):
