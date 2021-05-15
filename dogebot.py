@@ -64,7 +64,7 @@ def checkForNewTweet(twitter_api):
 
 
 if __name__ == "__main__":
-    schedule.every(10).seconds.do(checkForNewTweet, twitter_api)
+    schedule.every(60).seconds.do(checkForNewTweet, twitter_api)
 
     while 1:
         schedule.run_pending()
