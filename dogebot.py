@@ -1,7 +1,7 @@
 import os
 import datetime
 from dotenv import load_dotenv
-from binance import Client, ThreadedWebsocketManager, ThreadedDepthCacheManager
+from binance import Client
 import tweepy
 
 from analyse_tweet import analyse_tweet
@@ -16,18 +16,17 @@ twitter_api_secret = os.getenv('CONSUMER_SECRET')
 twitter_api_token = os.getenv('ACCESS_TOKEN')
 twitter_api_secret_token = os.getenv('ACCESS_TOKEN_SECRET')
 
+# Binance API
+client = Client(binance_api_key, binance_api_secret)
+
 # Twitter API
 auth = tweepy.OAuthHandler(twitter_api_key, twitter_api_secret)
 auth.set_access_token(twitter_api_token, twitter_api_secret_token)
 twitter_api = tweepy.API(auth, wait_on_rate_limit=True)
 
 # #
-#   Twitter Functions
+#   Check for new tweets
 # #
-
-# Working with Doge devs to improve system transaction efficiency. Potentially promising.
-# To be clear, I strongly believe in crypto, but it can’t drive a massive increase in fossil fuel use, especially coal
-# Do you want Tesla to accept Doge?
 
 
 def checkForNewTweet(twitter_api):
@@ -47,35 +46,10 @@ def checkForNewTweet(twitter_api):
 
     # If tweet is less than 3 min old, analyse and buy
     if time_difference <= 3 or time_difference == 0:
-        analyse_tweet(tweet)
+        analyse_tweet(tweet, client)
     else:
-        analyse_tweet(tweet)
+        return
 
 
-# #
-#   Binance API
-# #
-
-
-client = Client(binance_api_key, binance_api_secret)
-
-
-def buyDoge(client):
-    # Get DOGE price
-    doge_price = client.get_symbol_ticker(symbol="DOGEUSDT")
-
-    # Calculate how much DOGE $25 can buy
-    buy_quantity = round(25 / float(doge_price['price']))
-
-    # Create & Process Order
-    order = client.create_test_order(
-        symbol='DOGEUSDT',
-        side=Client.SIDE_BUY,
-        type=Client.ORDER_TYPE_MARKET,
-        quantity=buy_quantity
-    )
-
-    print(doge_price, buy_quantity)
-
-
-checkForNewTweet(twitter_api)
+if __name__ == "__main__":
+    checkForNewTweet(twitter_api)

@@ -1,7 +1,30 @@
 from textblob import TextBlob
+from binance import Client
+
+# #
+#   Binance API
+# #
 
 
-def analyse_tweet(tweet):
+def doge_order_request(client):
+    # Get DOGE price
+    doge_price = client.get_symbol_ticker(symbol="DOGEUSDT")
+
+    # Calculate how much DOGE $25 can buy
+    buy_quantity = round(25 / float(doge_price['price']))
+
+    # Create & Process Order
+    order = client.create_test_order(
+        symbol='DOGEUSDT',
+        side=Client.SIDE_BUY,
+        type=Client.ORDER_TYPE_MARKET,
+        quantity=buy_quantity
+    )
+
+    print('Bought', buy_quantity, 'DOGE at', doge_price['price'])
+
+
+def analyse_tweet(tweet, client):
     # #
     # Get Tweet Polarity
     # #
@@ -19,12 +42,20 @@ def analyse_tweet(tweet):
 
     # Get average polarity
     avg_polarity = total_polarity / num_of_sentences
-    print(avg_polarity)
 
     # #
     # Check Tweet Keywords
     # #
-    # keywords = ['doge', 'dogecoin', 'crypto']
+    keywords = ['doge', 'dogecoin', 'crypto']
     tweet_keywords = tweet.lower().split()
 
-    print(tweet_keywords)
+    # Check if tweet contains and keywords
+    if any(keywords in tweet_keywords for keywords in keywords):
+
+        # If avg_polarity is less than or equal to zero, order.
+        if avg_polarity >= 0:
+            doge_order_request(client)
+        else:
+            return
+    else:
+        return
