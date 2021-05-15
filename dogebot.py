@@ -32,6 +32,9 @@ twitter_api = tweepy.API(auth, wait_on_rate_limit=True)
 
 
 def checkForNewTweet(twitter_api):
+    print('Checking tweets..')
+
+    # Elon musk most recent tweet
     tweets = twitter_api.user_timeline(
         screen_name="elonmusk",
         count=1,
