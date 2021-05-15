@@ -37,7 +37,7 @@ def checkForNewTweet(twitter_api):
 
     # Elon musk most recent tweet
     tweets = twitter_api.user_timeline(
-        screen_name="evalo01",
+        screen_name="elonmusk",
         count=1,
         lang="en",
         tweet_mode="extended",
