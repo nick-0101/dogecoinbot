@@ -1,4 +1,5 @@
 import os
+import re
 import datetime
 import schedule
 import time
@@ -36,7 +37,7 @@ def checkForNewTweet(twitter_api):
 
     # Elon musk most recent tweet
     tweets = twitter_api.user_timeline(
-        screen_name="elonmusk",
+        screen_name="evalo01",
         count=1,
         lang="en",
         tweet_mode="extended",
@@ -46,13 +47,9 @@ def checkForNewTweet(twitter_api):
     # Tweet text
     tweet = tweets.full_text
 
+    print('Current tweet :', tweet)
     # Parse Tweet
-    punctuations = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
-    no_punct = ""
-
-    for char in tweet:
-        if char not in punctuations:
-            no_punct = no_punct + char
+    no_punct = re.sub(r'[\W\s]', ' ', tweet)
 
     tweet = no_punct
 
@@ -67,6 +64,7 @@ def checkForNewTweet(twitter_api):
 
 
 if __name__ == "__main__":
+    checkForNewTweet(twitter_api)
     schedule.every(60).seconds.do(checkForNewTweet, twitter_api)
 
     while 1:
