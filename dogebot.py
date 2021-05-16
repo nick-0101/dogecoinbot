@@ -47,7 +47,7 @@ def checkForNewTweet(twitter_api):
         # Tweet text
         tweet = tweets[0].full_text
 
-        print('Current tweet :', tweet)
+        print('Current tweet :', datetime.datetime.now(), tweet)
 
         # Parse Tweet
         no_punct = re.sub(r'[\W\s]', ' ', tweet)
