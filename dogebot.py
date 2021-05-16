@@ -42,10 +42,10 @@ def checkForNewTweet(twitter_api):
         lang="en",
         tweet_mode="extended",
         include_rts=False,
-    )[0]
+    )
 
     # Tweet text
-    tweet = tweets.full_text
+    tweet = tweets[0].full_text
 
     print('Current tweet :', tweet)
     # Parse Tweet
@@ -54,7 +54,8 @@ def checkForNewTweet(twitter_api):
     tweet = no_punct
 
     # Get the minute since tweet
-    time_difference = datetime.datetime.now().minute - tweets.created_at.minute
+    time_difference = datetime.datetime.now().minute - \
+        tweets[0].created_at.minute
 
     # If tweet is less than 3 min old, analyse and buy
     if time_difference <= 3 or time_difference == 0:
