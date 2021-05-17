@@ -46,12 +46,10 @@ def checkForNewTweet(twitter_api):
     if tweets:
         # Tweet text
         tweet = tweets[0].full_text
-
         print('Current tweet :', datetime.datetime.now(), tweet)
 
         # Parse Tweet
         no_punct = re.sub(r'[\W\s]', ' ', tweet)
-
         tweet = no_punct
 
         # Get the minute since tweet
