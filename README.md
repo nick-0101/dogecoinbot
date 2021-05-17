@@ -12,7 +12,7 @@ This Binance trading bot will check Elon Musks twitter feed for tweets about Dog
 
 ## READ BEFORE USE
 1. By using this bot, you will be using REAL money.
-2. To test the bot out change ```sh client.create_order() to client.create_test_order()```
+2. To test the bot out change ```client.create_order()``` to ```client.create_test_order()```
 
 
 ## Usage
