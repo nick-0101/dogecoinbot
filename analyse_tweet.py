@@ -28,7 +28,6 @@ def doge_order_request(client):
 
         time.sleep(240)
     except:
-        print('Order failed')
         return
 
 
@@ -58,8 +57,9 @@ def analyse_tweet(tweet, client):
     tweet_keywords = tweet.lower().split()
 
     # Check if tweet contains and keywords
-    if any(keywords in tweet_keywords for keywords in keywords) and avg_polarity > 0:
-        # If avg_polarity is less than or equal to zero, order.
+    if any(keywords in tweet_keywords for keywords in keywords) and avg_polarity >= 0:
+
+        # Doge order request
         doge_order_request(client)
     else:
         return
