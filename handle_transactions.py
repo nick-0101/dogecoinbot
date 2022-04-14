@@ -12,7 +12,7 @@ parser.add_argument("--time_to_sell", type=int,
                     help="Specify how long until you want the bot to sell the dogecoin")
 args = parser.parse_args()
 
-# Send a buy order
+# Send a buy order request
 
 
 def doge_order_request(client):

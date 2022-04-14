@@ -34,6 +34,7 @@ def analyse_tweet(tweet, client):
 
     # Check if tweet contains and keywords
     if any(keywords in tweet_keywords for keywords in keywords) and avg_polarity >= 0:
+        # Log
         print('Tweet contains a positive sentiment of dogecoin.')
 
         # Send a doge order request

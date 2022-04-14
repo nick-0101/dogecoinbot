@@ -29,7 +29,7 @@ auth.set_access_token(twitter_api_token, twitter_api_secret_token)
 twitter_api = tweepy.API(auth, wait_on_rate_limit=True)
 
 # #
-#   Check for new tweets
+#  Check for new tweets
 # #
 
 

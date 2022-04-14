@@ -4,7 +4,7 @@ This Binance trading bot will check Elon Musks twitter feed for tweets about Dog
 
 ## Requirements
 
-- Twitter API.
+- Twitter Developer api.
 - Binance account with an API
 
 ## READ BEFORE USE
