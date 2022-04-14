@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from binance import Client
 import tweepy
 
+# Functions
 from analyse_tweet import analyse_tweet
 
 load_dotenv()
@@ -33,7 +34,7 @@ twitter_api = tweepy.API(auth, wait_on_rate_limit=True)
 
 
 def checkForNewTweet(twitter_api):
-    print('Checking tweets..')
+    print('🟢 Checking tweets..' + '\n')
 
     # Elon musk most recent tweet
     tweets = twitter_api.user_timeline(
