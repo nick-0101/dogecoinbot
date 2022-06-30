@@ -36,22 +36,7 @@ On startup, the bot checks for a new Elon Musk tweet every 60 seconds. If found,
      pip install -r requirements.txt
      ```
 
-- Easy mode (might clash with current depends)
-  ```sh
-  pip install -r requirements.txt
-  ```
-- Prefered Method (venv)
-
-  ```sh
-  python3 -m venv .venv
-
-  source .venv/bin/activate # linux
-  .\.venv/scripts/activate # windows
-
-  pip install -r requirements.txt
-  ```
-
-### 2. Create a `.env` in the root dir.
+### 2. Create a `.env` file in the root dir.
 
 ```sh
 # Binance
